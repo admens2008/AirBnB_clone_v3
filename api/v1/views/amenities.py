@@ -52,7 +52,7 @@ def post_amenity():
     """
     Creates an amenity
     """
-    if not request.get_json():
+    if not request.is_json or not request.get_json():
         abort(400, description="Not a JSON")
 
     if 'name' not in request.get_json():
@@ -70,7 +70,7 @@ def put_amenity(amenity_id):
     """
     Updates an amenity
     """
-    if not request.get_json():
+    if not request.is_json or not request.get_json():
         abort(400, description="Not a JSON")
 
     ignore = ['id', 'created_at', 'updated_at']
