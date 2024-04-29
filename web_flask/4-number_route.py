@@ -1,43 +1,53 @@
 #!/usr/bin/python3
-"""
-starts a Flask web application
+"""Write a script that starts a Flask web application:
+    Your web application must be listening on 0.0.0.0 , port 5000
+    Routes:
+        / : display “Hello HBNB!”
 """
 from flask import Flask
-
 
 app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
-def index():
-    """returns Hello HBNB!"""
-    return 'Hello HBNB!'
+def hello_hbnb():
+    """ Hello HBNB! output for hello route /"""
+    return "Hello HBNB!"
 
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
-    """returns HBNB"""
-    return 'HBNB'
+    """HBNB! output for hello route /"""
+    return "HBNB"
 
 
 @app.route('/c/<text>', strict_slashes=False)
-def cisfun(text):
-    """display “C ” followed by the value of the text variable"""
-    return 'C ' + text.replace('_', ' ')
+def c(text):
+    """HBNB! output for hello route /"""
+    text = text.replace("_", " ")
+    return f"C {text}"
 
 
 @app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def pythoniscool(text='is cool'):
-    """display “Python ”, followed by the value of the text variable"""
-    return 'Python ' + text.replace('_', ' ')
+def python(text='is cool'):
+    """/python/<text> : display “Python ”,
+    followed by the value of the text variable (replace
+    underscore _ symbols with a space )
+    /"""
+    text = text.replace("_", " ")
+    return f"Python {text}"
 
 
 @app.route('/number/<int:n>', strict_slashes=False)
-def imanumber(n):
-    """display “n is a number” only if n is an integer"""
-    return "{:d} is a number".format(n)
+def number(n):
+    """/number/<n> : display “ n is a number”
+    only if n is an integer
+    You must use the option strict_slashes=False
+    in your route definition"""
+    if type(n) is int:
+        return f"{n} is a number"
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5000')
+    app.run(host='0.0.0.0')
