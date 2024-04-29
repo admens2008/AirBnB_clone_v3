@@ -67,7 +67,7 @@ def post_place(city_id):
     if not city:
         abort(404)
 
-    if not request.get_json():
+    if not request.is_json or not request.get_json():
         abort(400, description="Not a JSON")
 
     if 'user_id' not in request.get_json():
@@ -98,10 +98,10 @@ def put_place(place_id):
     if not place:
         abort(404)
 
-    data = request.get_json()
-    if not data:
+    if not request.is_json or not request.get_json():
         abort(400, description="Not a JSON")
 
+    data = request.get_json()
     ignore = ['id', 'user_id', 'city_id', 'created_at', 'updated_at']
 
     for key, value in data.items():
